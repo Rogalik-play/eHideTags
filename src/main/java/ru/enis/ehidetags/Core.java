@@ -82,7 +82,6 @@ public final class Core extends JavaPlugin implements Listener {
    public boolean onCommand(@NotNull CommandSender sender, Command cmd, @NotNull String commandLabel, String[] args) {
       if (cmd.getName().equalsIgnoreCase("ehtreload")) {
          conf.loadConfig();
-         Bukkit.getConsoleSender().sendMessage("§6eHideTags §f| §aSuccessfully reloaded");
          sender.sendMessage("§6eHideTags §f| §aSuccessfully reloaded");
          return true;
       } else {
