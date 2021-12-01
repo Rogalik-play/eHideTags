@@ -1,7 +1,14 @@
-name: rHideTags
-version: ${project.version}
-main: ru.rey.rhidetags.Core
+name: eHideTags
+version: 1.1.1
+main: ru.enis.ehidetags.Core
 api-version: 1.13
-authors: [Rey]
+authors: [Enis]
 description: Plugin to hide players nametags
-website: https://vk.com/re1khsempai
+website: https://vk.com/rogablik
+softdepend: [PlaceholderAPI]
+
+commands:
+   ehtreload:
+      description: Config reload
+      permission: eht.reload
+      usage: /ehtreload

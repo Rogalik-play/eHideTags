@@ -1,0 +1,9 @@
+/target/
+/null/
+/${dir}/
+/.settings/
+/.idea/
+/.project/
+/.classpath
+/.project
+/.git/
