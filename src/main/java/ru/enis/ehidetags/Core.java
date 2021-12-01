@@ -36,7 +36,6 @@ public final class Core extends JavaPlugin implements Listener {
       } else {
          log.warning("Could not find PlaceholderAPI!.");
       }
-      log.info(Arrays.toString(Bukkit.getPluginManager().getPlugins()));
 
       conf.loadConfig();
       boardSettings();
