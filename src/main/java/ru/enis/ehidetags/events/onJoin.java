@@ -15,7 +15,6 @@ public class onJoin implements Listener{
     @EventHandler
     public void join(PlayerJoinEvent e) {
         other.hideName(e.getPlayer());
-        System.out.println("onJoin");
     }
  }
 

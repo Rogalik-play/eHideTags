@@ -21,7 +21,6 @@ public class onInteract implements Listener {
     @EventHandler
     public void interact(PlayerInteractAtEntityEvent e) {
         if (e.getRightClicked() instanceof Player) {
-            System.out.println("onInteract");
             if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
                 e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders((Player) e.getRightClicked(), Config.message))));
             } else {
