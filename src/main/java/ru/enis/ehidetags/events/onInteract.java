@@ -1,7 +1,5 @@
 package ru.enis.ehidetags.events;
 
-import me.clip.placeholderapi.PlaceholderAPI;
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -9,8 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
-import ru.enis.ehidetags.Core;
-import ru.enis.ehidetags.utils.Config;
+import ru.enis.ehidetags.*;
+import ru.enis.ehidetags.misc.*;
+import ru.enis.ehidetags.misc.configs.Config;
 
 public class onInteract implements Listener {
 
@@ -22,9 +21,9 @@ public class onInteract implements Listener {
     public void interact(PlayerInteractAtEntityEvent e) {
         if (e.getRightClicked() instanceof Player) {
             if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-                e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders((Player) e.getRightClicked(), Config.message))));
+                e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(PluginPlaceholders.replacePlaceholder(String.valueOf(new PAPIUtils( (Player) e.getRightClicked(), (String) Config.message,(Player) e.getPlayer()).REL), (Player) e.getRightClicked())));
             } else {
-                e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', Config.message).replace("%player_displayname%", ((Player) e.getRightClicked()).getDisplayName())));
+                e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(PluginPlaceholders.replacePlaceholder(Config.message, (Player) e.getRightClicked())));
             }
         }
     }

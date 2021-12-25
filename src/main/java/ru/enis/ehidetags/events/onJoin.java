@@ -3,7 +3,7 @@ package ru.enis.ehidetags.events;
 import org.bukkit.Bukkit;
 import org.bukkit.event.player.PlayerJoinEvent;
 import ru.enis.ehidetags.*;
-import ru.enis.ehidetags.utils.*;
+import ru.enis.ehidetags.misc.*;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 

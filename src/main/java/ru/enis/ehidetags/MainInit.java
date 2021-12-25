@@ -3,13 +3,14 @@ package ru.enis.ehidetags;
 import org.bukkit.Bukkit;
 import ru.enis.ehidetags.commands.cmdInit;
 import ru.enis.ehidetags.events.EventInit;
-import ru.enis.ehidetags.utils.Config;
-import ru.enis.ehidetags.utils.other;
+import ru.enis.ehidetags.misc.configs.Config;
+import ru.enis.ehidetags.misc.configs.ConfigInit;
+import ru.enis.ehidetags.misc.other;
 
 public class MainInit {
 
     public MainInit(Core plugin){
-        new Config(plugin);
+        new ConfigInit(plugin);
         other.boardSettings();
         new EventInit(plugin);
         new cmdInit(plugin);
