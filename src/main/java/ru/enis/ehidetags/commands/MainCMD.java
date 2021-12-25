@@ -27,9 +27,9 @@ public class MainCMD implements CommandExecutor {
         if(args.length == 0){
             sender.sendMessage("§6eHideTags\n" + "§aAuthor: " + Core.getInstance().getDescription().getAuthors() + "\nVersion: " + plugin.getDescription().getVersion());
             return true;
-        } else if (args.length > 1) {
+        } /*else if (args.length > 1) {
             sender.sendMessage("§6eHideTags §f| " + Messages.Wrong_Usage);
-        }
+        }*/
         if(args[0].equalsIgnoreCase("reload") && sender.hasPermission("eht.reload")) {
             new ConfigInit(plugin);
             sender.sendMessage("§6eHideTags §f| " + Messages.Plugin_Reloaded);
