@@ -2,8 +2,8 @@ plugins {
     id 'java'
 }
 
-group 'ru.kolyakot33'
-version 'SNAPSHOT'
+group 'ru.enis'
+version '1.4'
 
 repositories {
     mavenCentral()
