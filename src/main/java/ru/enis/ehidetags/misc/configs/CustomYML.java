@@ -1,4 +1,4 @@
-package ru.enis.ehidetags.utils;
+package ru.enis.ehidetags.misc.configs;
 
 import java.io.File;
 import java.io.IOException;
