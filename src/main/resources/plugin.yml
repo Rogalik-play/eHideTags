@@ -1,14 +1,30 @@
 name: eHideTags
-version: 1.3
+version: 1.4
 main: ru.enis.ehidetags.Core
 api-version: 1.13
-authors: [Enis]
+author: Enis
 description: Plugin to hide players nametags
 website: https://vk.com/rogablik
 softdepend: [PlaceholderAPI]
 
 commands:
-   ehtreload:
-      description: Config reload
-      permission: eht.reload
-      usage: /ehtreload
+   eht:
+      description: Main Plugin Command
+      usage: /eht
+
+permissions:
+   eht.*:
+      description: Gives access to all plugin functions
+      children:
+         eht.reload: true
+         eht.command: true
+         eht.help: true
+   eht.reload:
+      description: Allows you to reload plugin
+      default: op
+   eht.command:
+      description: Allows you to use /eht command
+      default: false
+   eht.help:
+      description: Allows you to use /eht help command
+      default: false

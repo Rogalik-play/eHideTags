@@ -1,10 +1,7 @@
-package ru.enis.ehidetags.utils;
-
-import java.util.Objects;
+package ru.enis.ehidetags.misc.configs;
 
 import ru.enis.ehidetags.*;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
+import ru.enis.ehidetags.misc.Color;
 
 public class Config {
    public static String message;
@@ -13,6 +10,6 @@ public class Config {
    public Config(Core pluginA) {
       plugin = pluginA;
       CustomYML config = new CustomYML("MainСonfig", plugin);
-      message = (String)config.getConfigField("message", "%player_displayname%");
+      message = Color.ColorFormat(config.getConfigField("message", "%player_displayname%"));
    }
 }

@@ -1,4 +1,4 @@
-package ru.enis.ehidetags.utils;
+package ru.enis.ehidetags.misc;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
