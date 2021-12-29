@@ -4,6 +4,8 @@ plugins {
 
 group 'ru.enis'
 version '1.4'
+compileJava.options.encoding = 'UTF-8'
+
 
 repositories {
     mavenCentral()
