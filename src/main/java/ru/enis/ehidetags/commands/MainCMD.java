@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import org.jetbrains.annotations.Nullable;
 import ru.enis.ehidetags.*;
-import ru.enis.ehidetags.misc.configs.Config;
 import ru.enis.ehidetags.misc.configs.ConfigInit;
 import ru.enis.ehidetags.misc.configs.Messages;
 
@@ -27,9 +26,11 @@ public class MainCMD implements CommandExecutor {
         if(args.length == 0){
             sender.sendMessage("§6eHideTags\n" + "§aAuthor: " + Core.getInstance().getDescription().getAuthors() + "\nVersion: " + plugin.getDescription().getVersion());
             return true;
-        } /*else if (args.length > 1) {
+        }
+        if (args.length > 1) {
             sender.sendMessage("§6eHideTags §f| " + Messages.Wrong_Usage);
-        }*/
+            return true;
+        }
         if(args[0].equalsIgnoreCase("reload") && sender.hasPermission("eht.reload")) {
             new ConfigInit(plugin);
             sender.sendMessage("§6eHideTags §f| " + Messages.Plugin_Reloaded);
@@ -39,6 +40,7 @@ public class MainCMD implements CommandExecutor {
             sender.sendMessage("§6eHideTags §f| §a/eht reload - " + Messages.help_Cmd_Reload);
             return true;
         }
+        sender.sendMessage("§6eHideTags §f| " + Messages.Wrong_Usage);
         return true;
     }
 }

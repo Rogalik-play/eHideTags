@@ -6,7 +6,7 @@
 
     <groupId>ru.enis</groupId>
     <artifactId>eHideTags</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
     <packaging>jar</packaging>
 
     <name>eHideTags</name>
