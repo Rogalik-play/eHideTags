@@ -31,6 +31,11 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
+configurations.all {
+    // Check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 shadowJar {
     relocate "org.bstats", "ru.enis.ehidetags.metrics"
     relocate "net.kyori", "ru.enis.ehidetags.libs.kyori"
