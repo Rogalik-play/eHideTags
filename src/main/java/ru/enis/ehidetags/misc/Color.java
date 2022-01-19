@@ -6,12 +6,14 @@ import ru.enis.ehidetags.Core;
 
 public class Color {
     private static final LegacyComponentSerializer HexSerializer = LegacyComponentSerializer.builder().hexColors().useUnusualXRepeatedCharacterHexFormat().build();
+    private static final LegacyComponentSerializer AmpersandSerializer = LegacyComponentSerializer.builder().character('&').build();
 
     public static TextComponent ColorFormat(String translate){
         if (Core.majorMinecraftVersion() > 15) {
             return HexSerializer.deserialize(translate);
         } else {
-            return LegacyComponentSerializer.legacyAmpersand().deserialize(translate);
+            return AmpersandSerializer.deserialize(translate);
+
         }
     }
     /*
