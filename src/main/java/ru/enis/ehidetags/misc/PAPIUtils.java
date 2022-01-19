@@ -1,15 +1,12 @@
 package ru.enis.ehidetags.misc;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.logging.Logger;
+import ru.enis.ehidetags.misc.logger.Log;
 
 public class PAPIUtils {
-    private static final Logger log = Bukkit.getLogger();
 
     public String REL;
     public String STANDART;
@@ -19,7 +16,7 @@ public class PAPIUtils {
             this.REL = setPlaceholders(p, setBracketPlaceholders(p, setRelationalPlaceholders(p, s, P)));
         }
         catch (Exception e){
-            log.warning("PlaceholderAPI loaded unsuccessful. Disabling PlaceholderAPI support");
+            Log.info("PlaceholderAPI loaded unsuccessful. Disabling PlaceholderAPI support");
         }
     }
     @NotNull
