@@ -67,7 +67,7 @@ public final class Core extends JavaPlugin implements Listener {
       new UpdateChecker(this, 97904).getVersion(version -> {
          if (!this.getDescription().getVersion().equals(version)) {
             Log.info("There is a new update available.");
-            Core.OUTDATED = true;
+            OUTDATED = true;
          }
       });
       //bStats
