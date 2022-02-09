@@ -19,7 +19,6 @@ public class PAPIUtils {
             Log.info("PlaceholderAPI loaded unsuccessful. Disabling PlaceholderAPI support");
         }
     }
-    @NotNull
     public static String setPlaceholders(final Player p, @NotNull String s) {
         try {
             return PlaceholderAPI.setPlaceholders(p, s);

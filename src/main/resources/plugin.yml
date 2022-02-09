@@ -1,10 +1,9 @@
 name: eHideTags
-version: 1.6
+version: 1.7
 main: ru.enis.ehidetags.Core
 api-version: 1.13
 author: Enis
 description: Plugin to hide players nametags
-website: ehttps://vk.com/rogablik
 softdepend: [PlaceholderAPI]
 
 commands:

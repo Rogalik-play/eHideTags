@@ -24,4 +24,8 @@ public class other {
         requireNonNull(team).setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
         team.setCanSeeFriendlyInvisibles(false);
     }
+
+    public static void removeBoard() {
+        team.unregister();
+    }
 }

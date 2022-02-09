@@ -1,19 +1,15 @@
 package ru.enis.ehidetags.events;
 
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.TextComponent;
-import net.md_5.bungee.api.ChatMessageType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import ru.enis.ehidetags.Core;
-import ru.enis.ehidetags.misc.Color;
-import ru.enis.ehidetags.misc.PAPIUtils;
-import ru.enis.ehidetags.misc.PluginPlaceholders;
-import ru.enis.ehidetags.misc.configs.Config;
+import ru.enis.ehidetags.misc.*;
 import net.kyori.adventure.audience.Audience;
+import ru.enis.ehidetags.misc.configs.ActionBar;
 
 import static ru.enis.ehidetags.Core.adventure;
 
@@ -26,20 +22,22 @@ public class onInteract implements Listener {
     @EventHandler
     public void interact(PlayerInteractAtEntityEvent e) {
         if (e.getRightClicked() instanceof Player) {
+            if (ActionBar.enabled) {
 
-            final Audience audience = adventure().player(e.getPlayer());
+                final Audience audience = adventure().player(e.getPlayer());
 
-            Player rc = (Player) e.getRightClicked();
+                Player rc = (Player) e.getRightClicked();
 
-            String placeholders = PluginPlaceholders.replacePlaceholder(Config.message, rc);
+                String placeholders = PluginPlaceholders.replacePlaceholder(ActionBar.message, rc);
 
-            if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-                placeholders = String.valueOf(new PAPIUtils(rc,  placeholders, e.getPlayer()).REL);
+                if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+                    placeholders = String.valueOf(new PAPIUtils(rc, placeholders, e.getPlayer()).REL);
+                }
+
+                TextComponent color = Color.ColorFormat(placeholders);
+
+                audience.sendActionBar(color);
             }
-
-            TextComponent color = Color.ColorFormat(placeholders);
-
-            audience.sendActionBar(color);
         }
     }
 }

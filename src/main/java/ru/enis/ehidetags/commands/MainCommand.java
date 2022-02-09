@@ -2,14 +2,11 @@ package ru.enis.ehidetags.commands;
 
 import net.kyori.adventure.audience.Audience;
 import org.bukkit.command.*;
-import org.bukkit.command.defaults.BukkitCommand;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import org.jetbrains.annotations.Nullable;
 import ru.enis.ehidetags.*;
-import ru.enis.ehidetags.misc.Color;
-import ru.enis.ehidetags.misc.configs.ConfigInit;
+import ru.enis.ehidetags.misc.configs.Config;
 import ru.enis.ehidetags.misc.configs.Messages;
 
 import static ru.enis.ehidetags.Core.adventure;
@@ -46,7 +43,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if(args[0].equalsIgnoreCase("reload") && sender.hasPermission("eht.reload")) {
-            new ConfigInit(plugin);
+            new Config(plugin);
+            new Messages(plugin);
             audience.sendMessage(ColorFormat("§6eHideTags §f| " + Messages.Plugin_Reloaded));
             return true;
         }

@@ -4,6 +4,6 @@ import org.bukkit.entity.Player;
 
 public class PluginPlaceholders {
     public static String replacePlaceholder(String s, Player p){
-        return s.replaceAll("%player_displayname%", p.getDisplayName());
+        return s.replaceAll("%player%", p.getDisplayName());
     }
 }

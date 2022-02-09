@@ -1,20 +1,21 @@
 package ru.enis.ehidetags;
 
-import java.util.logging.Logger;
-
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.jetbrains.annotations.NotNull;
 import ru.enis.ehidetags.commands.MainCommand;
 import ru.enis.ehidetags.events.onInteract;
 import ru.enis.ehidetags.events.onJoin;
 import ru.enis.ehidetags.misc.UpdateChecker;
-import ru.enis.ehidetags.misc.configs.ConfigInit;
+import ru.enis.ehidetags.misc.configs.Config;
+import ru.enis.ehidetags.misc.configs.Messages;
 import ru.enis.ehidetags.misc.logger.Log;
 import ru.enis.ehidetags.misc.other;
+
+import java.util.logging.Logger;
 
 public final class Core extends JavaPlugin implements Listener {
    String serverPackageName;
@@ -55,7 +56,8 @@ public final class Core extends JavaPlugin implements Listener {
       //Logger
       Log.init();
       //Config
-      new ConfigInit(this);
+      new Config(this);
+      new Messages(this);
       //Board
       other.boardSettings();
       //Event
@@ -80,7 +82,6 @@ public final class Core extends JavaPlugin implements Listener {
 
       Bukkit.getConsoleSender().sendMessage("");
       Bukkit.getConsoleSender().sendMessage("§6eHideTags §f| §aSuccessfully enabled");
-      Bukkit.getConsoleSender().sendMessage("§6eHideTags §f| §aBy: §fvk.com/rogablik");
       Bukkit.getConsoleSender().sendMessage("");
    }
 
@@ -90,5 +91,6 @@ public final class Core extends JavaPlugin implements Listener {
          adventure.close();
          adventure = null;
       }
+      other.removeBoard();
    }
 }

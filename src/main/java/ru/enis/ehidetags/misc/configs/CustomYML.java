@@ -2,13 +2,15 @@ package ru.enis.ehidetags.misc.configs;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 import org.jetbrains.annotations.Nullable;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 /**
  * @author Jadr (Offlinecoppter)
- * {@link https://www.ancode.de}
+ * {@link \https://www.ancode.de}
  * @version 1.1   (22.10.2020)
  * <i>Note that if you do use this in one of your projects, leave this notice.</i>
  * <i>Please do credit me if you do use this in one of your projects.</i>
@@ -50,8 +52,8 @@ public class CustomYML {
    }
    /**
     *
-    * @param Path of field
-    * @param Field value as Object
+    * @param \Path of field
+    * @param \Field value as Object
     * @return whether the save was successful
     */
    public boolean setField(String path, Object o) {
@@ -81,6 +83,25 @@ public class CustomYML {
          }
       } else {
          cfg.set(path, whenNotFound);
+         save();
+      }
+      return whenNotFound;
+   }
+
+   @SuppressWarnings("unchecked")
+   @Nullable
+   public <T> T getConfigField(String path, T whenNotFound, List<String> whenNoComment) {
+      FileConfiguration cfg = this.getConfig();
+      Object o = cfg.get(path);
+      if (o != null) {
+         try {
+            return (T) o;
+         } catch (Exception e) {
+            return null;
+         }
+      } else {
+         cfg.set(path, whenNotFound);
+         cfg.setComments(path, whenNoComment);
          save();
       }
       return whenNotFound;
