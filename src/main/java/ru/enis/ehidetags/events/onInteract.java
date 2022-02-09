@@ -21,7 +21,7 @@ public class onInteract implements Listener {
 
     @EventHandler
     public void interact(PlayerInteractAtEntityEvent e) {
-        if (e.getRightClicked() instanceof Player) {
+        if (e.getRightClicked() instanceof Player && !e.getRightClicked().hasMetadata("NPC")) {
             if (ActionBar.enabled) {
 
                 final Audience audience = adventure().player(e.getPlayer());
