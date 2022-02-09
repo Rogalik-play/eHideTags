@@ -9,9 +9,17 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ master ]
+    branches:
+    - master
+    paths:
+    - "src/**"
+    - "build.gradle"
   pull_request:
-    branches: [ master ]
+    branches:
+    - master
+    paths:
+    - "src/**"
+    - "build.gradle"
 
 jobs:
   build:
