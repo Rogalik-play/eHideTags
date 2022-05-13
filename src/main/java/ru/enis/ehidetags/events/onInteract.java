@@ -10,32 +10,39 @@ import ru.enis.ehidetags.Core;
 import ru.enis.ehidetags.misc.*;
 import net.kyori.adventure.audience.Audience;
 import ru.enis.ehidetags.misc.configs.ActionBar;
+import ru.enis.ehidetags.misc.dependencies.PlaceholderAPIHook;
 
 import static ru.enis.ehidetags.Core.adventure;
 
 public class onInteract implements Listener {
 
+    //Регистрация ивента для плагина
     public onInteract(Core plugin){
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
     public void interact(PlayerInteractAtEntityEvent e) {
+        //Проверка на игрока
         if (e.getRightClicked() instanceof Player && !e.getRightClicked().hasMetadata("NPC")) {
+            //Проверка на включенный ЭкшнБар
             if (ActionBar.enabled) {
-
+                //Берет игрока для Audience
                 final Audience audience = adventure().player(e.getPlayer());
 
+                //Берет игрока на ПКМ
                 Player rc = (Player) e.getRightClicked();
 
-                String placeholders = PluginPlaceholders.replacePlaceholder(ActionBar.message, rc);
+                //Мои заменители
+                String placeholders = Format.replacePlaceholder(ActionBar.message, rc);
 
-                if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-                    placeholders = String.valueOf(new PAPIUtils(rc, placeholders, e.getPlayer()).REL);
-                }
+                //Заменители из PAPI
+                placeholders = String.valueOf(new PlaceholderAPIHook(rc, placeholders, e.getPlayer()).REL);
 
+                //Форматирование цвета
                 TextComponent color = Color.ColorFormat(placeholders);
 
+                //Отправка ЭкшнБара
                 audience.sendActionBar(color);
             }
         }

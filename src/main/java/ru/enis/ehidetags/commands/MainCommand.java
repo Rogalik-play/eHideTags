@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static net.kyori.adventure.text.Component.text;
+import static ru.enis.ehidetags.misc.configs.Messages.Plugin_Prefix;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
     private Core plugin;
@@ -30,29 +31,29 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String commandLabel, @Nullable String[] args) {
         final Audience audience = (Audience) adventure().sender(sender);
-        if (!sender.hasPermission("eht.command")) {
-            audience.sendMessage(ColorFormat("§6eHideTags §f| " + Messages.NoPermission));
+        if (!sender.hasPermission("itemown.command")) {
+            audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| " + Messages.NoPermission));
             return true;
         }
         if(args.length == 0){
-            audience.sendMessage(ColorFormat("§6eHideTags\n" + "§aAuthor: " + Core.getInstance().getDescription().getAuthors() + "\nVersion: " + plugin.getDescription().getVersion()));
+            audience.sendMessage(ColorFormat(Plugin_Prefix + "\n" + "§aAuthor: " + Core.getInstance().getDescription().getAuthors() + "\nVersion: " + plugin.getDescription().getVersion()));
             return true;
         }
         if (args.length > 1) {
-            audience.sendMessage(ColorFormat("§6eHideTags §f| " + Messages.Wrong_Usage));
+            audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| " + Messages.Wrong_Usage));
             return true;
         }
-        if(args[0].equalsIgnoreCase("reload") && sender.hasPermission("eht.reload")) {
+        if(args[0].equalsIgnoreCase("reload") && sender.hasPermission(cmdname + ".reload")) {
             new Config(plugin);
             new Messages(plugin);
-            audience.sendMessage(ColorFormat("§6eHideTags §f| " + Messages.Plugin_Reloaded));
+            audience.sendMessage(ColorFormat( Plugin_Prefix + " §f| " + Messages.Config_Reloaded));
             return true;
         }
-        if(args[0].equalsIgnoreCase("help") && sender.hasPermission("eht.help")) {
-            audience.sendMessage(ColorFormat("§6eHideTags §f| §a/eht reload - " + Messages.help_Cmd_Reload));
+        if(args[0].equalsIgnoreCase("help") && sender.hasPermission(cmdname + ".help")) {
+            audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| §a/" + cmdname + "reload - " + Messages.help_Cmd_Reload));
             return true;
         }
-        audience.sendMessage(ColorFormat("§6eHideTags §f| " + Messages.Wrong_Usage));
+        audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| " + Messages.Wrong_Usage));
         return true;
     }
 
@@ -60,10 +61,10 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         final List<String> completions = new ArrayList<>();
 
-        if(commandSender.hasPermission("eht.reload")) {
+        if(commandSender.hasPermission(cmdname + ".reload")) {
             completions.add("reload");
         }
-        if(commandSender.hasPermission("eht.help")) {
+        if(commandSender.hasPermission(cmdname + ".help")) {
             completions.add("help");
         }
         Collections.sort(completions);

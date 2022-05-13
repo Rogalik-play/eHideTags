@@ -1,5 +1,7 @@
 package ru.enis.ehidetags;
 
+import lombok.Getter;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -9,21 +11,24 @@ import org.jetbrains.annotations.NotNull;
 import ru.enis.ehidetags.commands.MainCommand;
 import ru.enis.ehidetags.events.onInteract;
 import ru.enis.ehidetags.events.onJoin;
+import ru.enis.ehidetags.misc.Color;
 import ru.enis.ehidetags.misc.UpdateChecker;
 import ru.enis.ehidetags.misc.configs.Config;
 import ru.enis.ehidetags.misc.configs.Messages;
+import ru.enis.ehidetags.misc.dependencies.DependenciesManager;
 import ru.enis.ehidetags.misc.logger.Log;
 import ru.enis.ehidetags.misc.other;
 
 import java.util.logging.Logger;
+
+import static net.kyori.adventure.text.Component.text;
 
 public final class Core extends JavaPlugin implements Listener {
    String serverPackageName;
    String serverApiVersion;
    static int majorMinecraftVersion;
    public static boolean OUTDATED = false;
-   private static Core instance;
-   Logger log = this.getLogger();
+   @Getter private static Core instance;
    private static BukkitAudiences adventure;
 
    public static @NotNull BukkitAudiences adventure() {
@@ -32,29 +37,22 @@ public final class Core extends JavaPlugin implements Listener {
       }
       return adventure;
    }
-   public static Core getInstance(){
-      return instance;
-   }
 
    public static int majorMinecraftVersion() {
       return majorMinecraftVersion;
    }
 
    public void onEnable() {
-      adventure = BukkitAudiences.create(this);
-
-      if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-         Bukkit.getPluginManager().registerEvents(this, this);
-      } else {
-         log.warning("Could not find PlaceholderAPI!.");
-      }
       instance = this;
+      adventure = BukkitAudiences.create(this);
 
       this.serverPackageName = this.getServer().getClass().getPackage().getName();
       this.serverApiVersion = this.serverPackageName.substring(this.serverPackageName.lastIndexOf('.') + 1);
       majorMinecraftVersion = Integer.parseInt(this.serverApiVersion.split("_")[1]);
       //Logger
       Log.init();
+      //Dependencies
+      new DependenciesManager(this);
       //Config
       new Config(this);
       new Messages(this);
@@ -80,9 +78,11 @@ public final class Core extends JavaPlugin implements Listener {
          Bukkit.getOnlinePlayers().forEach(other::hideName);
       }
 
-      Bukkit.getConsoleSender().sendMessage("");
-      Bukkit.getConsoleSender().sendMessage("§6eHideTags §f| §aSuccessfully enabled");
-      Bukkit.getConsoleSender().sendMessage("");
+      Audience console = adventure().console();
+
+      console.sendMessage(text(""));
+      console.sendMessage(Color.ColorFormat(Messages.Plugin_Prefix + " §f| §aSuccessfully enabled"));
+      console.sendMessage(text(""));
    }
 
    @Override

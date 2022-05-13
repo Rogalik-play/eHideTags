@@ -26,6 +26,8 @@ public class other {
     }
 
     public static void removeBoard() {
-        team.unregister();
+        if(team != null){
+            team.unregister();
+        }
     }
 }

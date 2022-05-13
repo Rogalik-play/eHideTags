@@ -39,7 +39,7 @@ public class CustomYML {
     */
    @SuppressWarnings("unchecked")
    @Nullable
-   public <T> T getConfigField(String path) {
+   public <T> T getField(String path) {
       FileConfiguration cfg = this.getConfig();
       Object o = cfg.get(path);
       if (o != null) {
@@ -72,7 +72,7 @@ public class CustomYML {
     */
    @SuppressWarnings("unchecked")
    @Nullable
-   public <T> T getConfigField(String path, T whenNotFound) {
+   public <T> T getField(String path, T whenNotFound) {
       FileConfiguration cfg = this.getConfig();
       Object o = cfg.get(path);
       if (o != null) {
@@ -90,7 +90,7 @@ public class CustomYML {
 
    @SuppressWarnings("unchecked")
    @Nullable
-   public <T> T getConfigField(String path, T whenNotFound, List<String> whenNoComment) {
+   public <T> T getField(String path, T whenNotFound, List<String> whenNoComment) {
       FileConfiguration cfg = this.getConfig();
       Object o = cfg.get(path);
       if (o != null) {
