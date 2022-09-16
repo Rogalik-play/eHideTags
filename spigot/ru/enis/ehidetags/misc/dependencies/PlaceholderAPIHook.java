@@ -11,16 +11,7 @@ public class PlaceholderAPIHook {
 
     public String REL;
     public String STANDART;
-    public PlaceholderAPIHook(){
-        checkPAPI();
-    }
-    private boolean checkPAPI() {
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null && Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
-            return true;
-        }else {
-            return false;
-        }
-    }
+
     public PlaceholderAPIHook(Player p, @NotNull final String s, @Nullable Player P){
         try {
             if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null && Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {

@@ -2,6 +2,7 @@ package ru.enis.ehidetags.misc.configs;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
@@ -90,7 +91,7 @@ public class CustomYML {
 
    @SuppressWarnings("unchecked")
    @Nullable
-   public <T> T getField(String path, T whenNotFound, List<String> whenNoComment) {
+   public <T> T getField(String path, T whenNotFound, String comment) {
       FileConfiguration cfg = this.getConfig();
       Object o = cfg.get(path);
       if (o != null) {
@@ -101,7 +102,7 @@ public class CustomYML {
          }
       } else {
          cfg.set(path, whenNotFound);
-         cfg.setComments(path, whenNoComment);
+         cfg.setComments(path, Arrays.asList(comment.split("\n")));
          save();
       }
       return whenNotFound;

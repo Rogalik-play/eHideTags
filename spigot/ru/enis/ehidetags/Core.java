@@ -15,11 +15,8 @@ import ru.enis.ehidetags.misc.Color;
 import ru.enis.ehidetags.misc.UpdateChecker;
 import ru.enis.ehidetags.misc.configs.Config;
 import ru.enis.ehidetags.misc.configs.Messages;
-import ru.enis.ehidetags.misc.dependencies.DependenciesManager;
 import ru.enis.ehidetags.misc.logger.Log;
 import ru.enis.ehidetags.misc.other;
-
-import java.util.logging.Logger;
 
 import static net.kyori.adventure.text.Component.text;
 
@@ -51,13 +48,13 @@ public final class Core extends JavaPlugin implements Listener {
       majorMinecraftVersion = Integer.parseInt(this.serverApiVersion.split("_")[1]);
       //Logger
       Log.init();
-      //Dependencies
-      new DependenciesManager(this);
       //Config
       new Config(this);
       new Messages(this);
       //Board
-      other.boardSettings();
+      if (Bukkit.getPluginManager().getPlugin("TAB") == null && !Bukkit.getPluginManager().isPluginEnabled("TAB")) {
+         other.boardSettings();
+      }
       //Event
       new onJoin(this);
       new onInteract(this);
@@ -91,6 +88,8 @@ public final class Core extends JavaPlugin implements Listener {
          adventure.close();
          adventure = null;
       }
-      other.removeBoard();
+      if (Bukkit.getPluginManager().getPlugin("TAB") == null && !Bukkit.getPluginManager().isPluginEnabled("TAB")) {
+         other.removeBoard();
+      }
    }
 }

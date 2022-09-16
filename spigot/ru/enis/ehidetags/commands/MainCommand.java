@@ -31,12 +31,14 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String commandLabel, @Nullable String[] args) {
         final Audience audience = (Audience) adventure().sender(sender);
-        if (!sender.hasPermission("itemown.command")) {
+        if (!sender.hasPermission(cmdname + ".command")) {
             audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| " + Messages.NoPermission));
             return true;
         }
         if(args.length == 0){
-            audience.sendMessage(ColorFormat(Plugin_Prefix + "\n" + "§aAuthor: " + Core.getInstance().getDescription().getAuthors() + "\nVersion: " + plugin.getDescription().getVersion()));
+            audience.sendMessage(ColorFormat(" §f| " + Plugin_Prefix +
+                "\n &f| &aAuthor: " + Core.getInstance().getDescription().getAuthors() +
+                "\n &f| &aVersion: " + plugin.getDescription().getVersion()));
             return true;
         }
         if (args.length > 1) {
@@ -50,7 +52,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if(args[0].equalsIgnoreCase("help") && sender.hasPermission(cmdname + ".help")) {
-            audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| §a/" + cmdname + "reload - " + Messages.help_Cmd_Reload));
+            audience.sendMessage(ColorFormat(" §f| " + Plugin_Prefix +
+                "\n §f| §a/" + cmdname + " reload - " + Messages.Reload_Help ));
             return true;
         }
         audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| " + Messages.Wrong_Usage));
