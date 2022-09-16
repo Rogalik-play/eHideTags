@@ -80,7 +80,7 @@ local.properties
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries
-.gradle/
+/.gradle/
 
 # CMake
 cmake-build-debug/
