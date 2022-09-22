@@ -4,7 +4,7 @@ main: ru.enis.ehidetags.Core
 api-version: 1.13
 author: Enis
 description: Plugin to hide players nametags
-softdepend: [PlaceholderAPI, Vault]
+softdepend: [PlaceholderAPI]
 
 commands:
    eht:

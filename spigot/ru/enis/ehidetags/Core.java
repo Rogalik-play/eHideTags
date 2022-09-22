@@ -52,9 +52,7 @@ public final class Core extends JavaPlugin implements Listener {
       new Config(this);
       new Messages(this);
       //Board
-      if (Bukkit.getPluginManager().getPlugin("TAB") == null && !Bukkit.getPluginManager().isPluginEnabled("TAB")) {
-         other.boardSettings();
-      }
+      other.boardSettings();
       //Event
       new onJoin(this);
       new onInteract(this);
