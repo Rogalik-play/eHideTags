@@ -12,13 +12,15 @@ on:
     branches:
     - master
     paths:
-    - "src/**"
+    - "resources/**"
+    - "spigot/**"
     - "build.gradle"
   pull_request:
     branches:
     - master
     paths:
-    - "src/**"
+    - "resources/**"
+    - "spigot/**"
     - "build.gradle"
 
 jobs:
