@@ -4,7 +4,7 @@ plugins {
 }
 
 group "ru.enis"
-version "1.7.2"
+version "1.7.3"
 
 repositories {
     maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }

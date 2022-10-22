@@ -17,6 +17,10 @@ public class other {
         p.setScoreboard(board);
     }
 
+    public static Scoreboard getScoreBoard() {
+        return board;
+    }
+
     public static void boardSettings() {
         board = ((ScoreboardManager) requireNonNull(Bukkit.getScoreboardManager())).getNewScoreboard();
         board.registerNewTeam("eHideTags");

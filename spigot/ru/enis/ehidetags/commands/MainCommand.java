@@ -1,6 +1,7 @@
 package ru.enis.ehidetags.commands;
 
 import net.kyori.adventure.audience.Audience;
+import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,11 +9,14 @@ import org.jetbrains.annotations.Nullable;
 import ru.enis.ehidetags.*;
 import ru.enis.ehidetags.misc.configs.Config;
 import ru.enis.ehidetags.misc.configs.Messages;
+import ru.enis.ehidetags.misc.other;
 
 import static ru.enis.ehidetags.Core.adventure;
 import static ru.enis.ehidetags.misc.Color.ColorFormat;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,6 +55,16 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             audience.sendMessage(ColorFormat( Plugin_Prefix + " §f| " + Messages.Config_Reloaded));
             return true;
         }
+        if(args[0].equalsIgnoreCase("debug") && sender.hasPermission(cmdname + ".debug")) {
+            ArrayList playerlist = new ArrayList();
+            Bukkit.getServer().getOnlinePlayers().forEach(p -> playerlist.add(p.getName()));
+            audience.sendMessage(ColorFormat(" §f| " + Plugin_Prefix +
+                "\n &f| &aTeam Members: " + other.getScoreBoard().getTeam("eHideTags").getEntries().toString() +
+                "\n &f| &aPlayer List: " + playerlist +
+                "\n &f| &aPlugin Version: " + Core.getInstance().getDescription().getVersion() +
+                "\n &f| &aServer Version: " + Bukkit.getServer().getVersion()));
+            return true;
+        }
         if(args[0].equalsIgnoreCase("help") && sender.hasPermission(cmdname + ".help")) {
             audience.sendMessage(ColorFormat(" §f| " + Plugin_Prefix +
                 "\n §f| §a/" + cmdname + " reload - " + Messages.Reload_Help ));
@@ -69,6 +83,9 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         }
         if(commandSender.hasPermission(cmdname + ".help")) {
             completions.add("help");
+        }
+        if(commandSender.hasPermission(cmdname + ".debug")) {
+            completions.add("debug");
         }
         Collections.sort(completions);
         return completions;

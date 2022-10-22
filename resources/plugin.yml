@@ -1,5 +1,5 @@
 name: eHideTags
-version: 1.7.2
+version: 1.7.3
 main: ru.enis.ehidetags.Core
 api-version: 1.13
 author: Enis
@@ -19,6 +19,7 @@ permissions:
          eht.command: true
          eht.help: true
          eht.updatenotify: true
+         eht.debug: true
    eht.reload:
       description: Allows you to reload plugin
       default: op
@@ -28,6 +29,9 @@ permissions:
    eht.help:
       description: Allows you to use /eht help command
       default: true
+   eht.debug:
+      description: Allows you to use /eht debug command
+      default: op
    eht.updatenotify:
       description: Allow you to get update notifications
       default: op

@@ -13,7 +13,6 @@ public class Color {
             return HexSerializer.deserialize(translate);
         } else {
             return LegacySerializer.deserialize(translate);
-
         }
     }
 }

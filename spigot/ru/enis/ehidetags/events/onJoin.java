@@ -26,7 +26,6 @@ public class onJoin implements Listener {
 
             //Отправка сообщения об обновлении
             audience.sendMessage(Color.ColorFormat("§6eHideTags §f| &7An update for plugin is available"));
-            audience.sendMessage(Color.ColorFormat("Text"));
         }
         //Добавление игрока в группу для скрытия ника
         other.hideName(e.getPlayer());

@@ -89,6 +89,14 @@ public class CustomYML {
       return whenNotFound;
    }
 
+   /**
+    * @param <T> -> Tries to cast the field value to the Class T
+    * @param whenNotFound -> What should get created in the config if field not exist
+    * @param comment -> What should get created in the config if field comment not exist
+    * @param path -> path in this config
+    * @return Object T if found, null if cast failed
+    */
+
    @SuppressWarnings("unchecked")
    @Nullable
    public <T> T getField(String path, T whenNotFound, String comment) {

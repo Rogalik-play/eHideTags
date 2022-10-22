@@ -46,6 +46,7 @@ public class PlaceholderAPIHook {
             return s;
         }
     }
+
     private String returnInput(String s) {
         return s;
     }
