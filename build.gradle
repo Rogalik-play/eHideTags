@@ -85,4 +85,7 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+    filesMatching(VERSION) {
+        expand props
+    }
 }
