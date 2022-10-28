@@ -11,7 +11,7 @@ on:
   push:
     branches:
     - master
-    - dev/**
+    - dev
     paths:
     - "resources/**"
     - "spigot/**"
@@ -19,7 +19,7 @@ on:
   pull_request:
     branches:
     - master
-    - dev/**
+    - dev
     paths:
     - "resources/**"
     - "spigot/**"
