@@ -19,6 +19,7 @@ import ru.enis.ehidetags.misc.logger.Log;
 import ru.enis.ehidetags.misc.other;
 
 import static net.kyori.adventure.text.Component.text;
+import static ru.enis.ehidetags.misc.Color.defaultColorize;
 
 public final class Core extends JavaPlugin implements Listener {
    String serverPackageName;
@@ -76,7 +77,7 @@ public final class Core extends JavaPlugin implements Listener {
       Audience console = adventure().console();
 
       console.sendMessage(text(""));
-      console.sendMessage(Color.colorize(Messages.Plugin_Prefix + " §f| §aSuccessfully enabled"));
+      console.sendMessage(defaultColorize("§6eHideTags §f| §aSuccessfully enabled"));
       console.sendMessage(text(""));
    }
 
