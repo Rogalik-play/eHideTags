@@ -25,7 +25,7 @@ public class onJoin implements Listener {
             final Audience audience = (Audience) adventure().player(e.getPlayer());
 
             //Отправка сообщения об обновлении
-            audience.sendMessage(Color.ColorFormat("§6eHideTags §f| &7An update for plugin is available"));
+            audience.sendMessage(Color.colorize("§6eHideTags §f| &7An update for plugin is available"));
         }
         //Добавление игрока в группу для скрытия ника
         other.hideName(e.getPlayer());

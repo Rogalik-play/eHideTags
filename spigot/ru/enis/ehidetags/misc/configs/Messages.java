@@ -7,10 +7,10 @@ public class Messages {
 
         public Messages(Core plugin) {
             CustomYML msg = new CustomYML("Messages", plugin);
-            Reload_Help = msg.getField("Help.Reload", "&aReloads plugin configuration");
-            Config_Reloaded = msg.getField("Reload", "&aConfig successfully reloaded");
-            Wrong_Usage = msg.getField("Wrong-Usage", "&7Wrong usage! Please type &6/eht help&7!");
-            NoPermission = msg.getField("NoPermission", "&cYou do not have permission for this!");
-            Plugin_Prefix = msg.getField("Prefix", "§6eHideTags");
+            Plugin_Prefix = msg.getField("Prefix", " <white>|</white> <gold>eHideTags</gold> <br> <white>|</white> ");
+            Wrong_Usage = msg.getField("Wrong-Usage", "<gray>Wrong usage! Please type <gold>/eht help<gray>!");
+            NoPermission = msg.getField("NoPermission", "<red>You do not have permission for this!");
+            Reload_Help = msg.getField("Help.Reload", "<green>/eht reload - Reloads plugin configuration");
+            Config_Reloaded = msg.getField("Reload", "<green>Config successfully reloaded</green>");
         }
     }

@@ -4,7 +4,7 @@ plugins {
 }
 
 group "ru.enis"
-version "1.7.3"
+version String.format("1.7.3%s-rev.%s", getBranchVer(), getBranchHash())
 
 repositories {
     maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
@@ -22,6 +22,8 @@ dependencies {
     implementation "org.bstats:bstats-bukkit:3.0.0"
     implementation "net.kyori:adventure-platform-bukkit:4.1.2"
     implementation "net.kyori:adventure-text-serializer-legacy:4.11.0"
+    implementation "net.kyori:adventure-text-minimessage:4.11.0"
+    implementation "com.github.Elytrium:ElytriumJavaCommons:1.0.3"
     implementation "org.yaml:snakeyaml:1.29"
     implementation "org.projectlombok:lombok:1.18.20"
 
@@ -59,5 +61,19 @@ sourceSets {
         java {
             srcDir "spigot"
         }
+    }
+}
+
+def getBranchHash() {
+    def branchHash = "git rev-parse --short HEAD".execute().text.trim()
+    return branchHash
+}
+
+def getBranchVer() {
+    def branchName = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
+    if (branchName.startsWith("dev")) {
+        return "-DEV"
+    } else {
+        return ""
     }
 }

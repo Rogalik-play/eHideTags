@@ -76,7 +76,7 @@ public final class Core extends JavaPlugin implements Listener {
       Audience console = adventure().console();
 
       console.sendMessage(text(""));
-      console.sendMessage(Color.ColorFormat(Messages.Plugin_Prefix + " §f| §aSuccessfully enabled"));
+      console.sendMessage(Color.colorize(Messages.Plugin_Prefix + " §f| §aSuccessfully enabled"));
       console.sendMessage(text(""));
    }
 

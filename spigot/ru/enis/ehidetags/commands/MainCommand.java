@@ -12,15 +12,14 @@ import ru.enis.ehidetags.misc.configs.Messages;
 import ru.enis.ehidetags.misc.other;
 
 import static ru.enis.ehidetags.Core.adventure;
-import static ru.enis.ehidetags.misc.Color.ColorFormat;
+import static ru.enis.ehidetags.misc.Color.colorize;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static net.kyori.adventure.text.Component.text;
+import static ru.enis.ehidetags.misc.Color.defaultColorize;
 import static ru.enis.ehidetags.misc.configs.Messages.Plugin_Prefix;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
@@ -36,29 +35,29 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String commandLabel, @Nullable String[] args) {
         final Audience audience = (Audience) adventure().sender(sender);
         if (!sender.hasPermission(cmdname + ".command")) {
-            audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| " + Messages.NoPermission));
+            audience.sendMessage(colorize(Plugin_Prefix + " §f| " + Messages.NoPermission));
             return true;
         }
         if(args.length == 0){
-            audience.sendMessage(ColorFormat(" §f| " + Plugin_Prefix +
+            audience.sendMessage(defaultColorize(" &f| &6eHideTags" +
                 "\n &f| &aAuthor: " + Core.getInstance().getDescription().getAuthors() +
                 "\n &f| &aVersion: " + plugin.getDescription().getVersion()));
             return true;
         }
         if (args.length > 1) {
-            audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| " + Messages.Wrong_Usage));
+            audience.sendMessage(colorize(Plugin_Prefix + " §f| " + Messages.Wrong_Usage));
             return true;
         }
         if(args[0].equalsIgnoreCase("reload") && sender.hasPermission(cmdname + ".reload")) {
             new Config(plugin);
             new Messages(plugin);
-            audience.sendMessage(ColorFormat( Plugin_Prefix + " §f| " + Messages.Config_Reloaded));
+            audience.sendMessage(colorize( Plugin_Prefix + Messages.Config_Reloaded));
             return true;
         }
         if(args[0].equalsIgnoreCase("debug") && sender.hasPermission(cmdname + ".debug")) {
             ArrayList playerlist = new ArrayList();
             Bukkit.getServer().getOnlinePlayers().forEach(p -> playerlist.add(p.getName()));
-            audience.sendMessage(ColorFormat(" §f| " + Plugin_Prefix +
+            audience.sendMessage(defaultColorize(" &f| &6eHideTags" +
                 "\n &f| &aTeam Members: " + other.getScoreBoard().getTeam("eHideTags").getEntries().toString() +
                 "\n &f| &aPlayer List: " + playerlist +
                 "\n &f| &aPlugin Version: " + Core.getInstance().getDescription().getVersion() +
@@ -66,11 +65,10 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if(args[0].equalsIgnoreCase("help") && sender.hasPermission(cmdname + ".help")) {
-            audience.sendMessage(ColorFormat(" §f| " + Plugin_Prefix +
-                "\n §f| §a/" + cmdname + " reload - " + Messages.Reload_Help ));
+            audience.sendMessage(colorize(Plugin_Prefix + Messages.Reload_Help ));
             return true;
         }
-        audience.sendMessage(ColorFormat(Plugin_Prefix + " §f| " + Messages.Wrong_Usage));
+        audience.sendMessage(colorize(Plugin_Prefix + Messages.Wrong_Usage));
         return true;
     }
 
