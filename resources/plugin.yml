@@ -20,8 +20,12 @@ permissions:
          eht.help: true
          eht.updatenotify: true
          eht.debug: true
+         eht.test: true
    eht.reload:
       description: Allows you to reload plugin
+      default: op
+   eht.test:
+      description: Allows you to use /eht test
       default: op
    eht.command:
       description: Allows you to use /eht command

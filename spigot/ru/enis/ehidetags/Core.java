@@ -5,6 +5,8 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +20,10 @@ import ru.enis.ehidetags.misc.configs.Messages;
 import ru.enis.ehidetags.misc.logger.Log;
 import ru.enis.ehidetags.misc.other;
 
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Paths;
+
 import static net.kyori.adventure.text.Component.text;
 import static ru.enis.ehidetags.misc.Color.defaultColorize;
 
@@ -27,6 +33,7 @@ public final class Core extends JavaPlugin implements Listener {
    static int majorMinecraftVersion;
    public static boolean OUTDATED = false;
    @Getter private static Core instance;
+   public onInteract interactEvent;
    private static BukkitAudiences adventure;
 
    public static @NotNull BukkitAudiences adventure() {
@@ -41,6 +48,7 @@ public final class Core extends JavaPlugin implements Listener {
    }
 
    public void onEnable() {
+
       instance = this;
       adventure = BukkitAudiences.create(this);
 
@@ -67,8 +75,8 @@ public final class Core extends JavaPlugin implements Listener {
          }
       });
       //bStats
-      int thisId = 	13770;
-      final Metrics metrics = new Metrics(this, thisId);
+//      int thisId = 	13770;
+//      final Metrics metrics = new Metrics(this, thisId);
 
       if (!Bukkit.getOnlinePlayers().isEmpty()) {
          Bukkit.getOnlinePlayers().forEach(other::hideName);
