@@ -2,13 +2,11 @@ package ru.enis.ehidetags.events;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
-import org.jetbrains.annotations.Nullable;
 import ru.enis.ehidetags.Core;
 import ru.enis.ehidetags.misc.*;
 import net.kyori.adventure.audience.Audience;
@@ -27,25 +25,21 @@ public class onInteract implements Listener {
 
     @EventHandler
     public void interact(PlayerInteractAtEntityEvent e) {
-        returnActionBar(e.getRightClicked(), e.getPlayer());
-    }
-
-    public static void returnActionBar(Entity entity, @Nullable Player player) {
         //Проверка на игрока
-        if (entity instanceof Player && !entity.hasMetadata("NPC")) {
+        if (e.getRightClicked() instanceof Player && !e.getRightClicked().hasMetadata("NPC")) {
             //Проверка на включенный ЭкшнБар
             if (Data.enabled) {
                 //Берет игрока для Audience
-                final Audience audience = adventure().player(player);
+                final Audience audience = adventure().player(e.getPlayer());
 
                 //Берет игрока на ПКМ
-                Player rc = (Player) entity;
+                Player rc = (Player) e.getRightClicked();
 
                 //Мои заменители
                 String placeholders = Format.playerPlaceholders(Data.player_message, rc);
 
                 //Заменители из PAPI
-                placeholders = String.valueOf(new PlaceholderAPIHook(rc, placeholders, player).REL);
+                placeholders = String.valueOf(new PlaceholderAPIHook(rc, placeholders, e.getPlayer()).REL);
 
                 //Форматирование цвета
                 Component color = colorize(placeholders);
@@ -54,11 +48,11 @@ public class onInteract implements Listener {
                 audience.sendActionBar(color);
             }
         }
-        if (entity instanceof Tameable && !player.isSneaking() && ((Tameable) entity).isTamed()) {
+        if (e.getRightClicked() instanceof Tameable && !e.getPlayer().isSneaking() && ((Tameable) e.getRightClicked()).isTamed()) {
             //Берет игрока для Audience
-            final Audience audience = adventure().player(player);
+            final Audience audience = adventure().player(e.getPlayer());
             //Берет моба на ПКМ
-            Tameable tm = (Tameable) entity;
+            Tameable tm = (Tameable) e.getRightClicked();
             //Мои заменители
             String placeholders = Format.tameablePlaceholders(Data.tameable_message, tm);
             //Форматирование цвета
