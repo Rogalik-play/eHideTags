@@ -1,47 +1,42 @@
 package ru.enis.ehidetags.misc.configs;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
-import org.jetbrains.annotations.Nullable;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.File;
+
 /**
- * @author Jadr (Offlinecoppter)
- * {@link \https://www.ancode.de}
- * @version 1.1   (22.10.2020)
+ * @author Enis (En0tuK)
+ * @version 1.0   (20.11.2022)
  * <i>Note that if you do use this in one of your projects, leave this notice.</i>
  * <i>Please do credit me if you do use this in one of your projects.</i>
  */
-public class CustomYML {
+public class CustomTOML {
    private String path = "plugins"+File.separatorChar;
-   private File ymlfile;
-   private FileConfiguration fc;
+   private final CommentedFileConfig cf;
    /**
     *
     * @param name of the file. can include folder paths (for instance
-    *             kits/users/Steve). Then the file Steve.yml would be in the folder
-    *             plugins/'plugin_name'/kits/users/Steve.yml
+    *             kits/users/Steve). Then the file Steve.toml would be in the folder
+    *             plugins/'plugin_name'/kits/users/Steve.toml
     * @param jp   -> Your plugin main instance
     */
-   public CustomYML(String name, JavaPlugin jp) {
+   public CustomTOML(String name, JavaPlugin jp) {
       this.path = "plugins/" + jp.getName();
-      this.ymlfile = new File(String.valueOf(path) + File.separatorChar + name + ".yml");
-      this.fc = (FileConfiguration) YamlConfiguration.loadConfiguration(this.ymlfile);
+      File tomlfile = new File(path + File.separatorChar + name + ".toml");
+      this.cf = CommentedFileConfig.builder(tomlfile).defaultResource("default" + name + ".toml").build(); // .defaultResource("defaultConfig.toml").autosave()
+      this.cf.load();
+//      this.fc = (FileConfiguration) YamlConfiguration.loadConfiguration(this.tomlfile);
    }
    /**
-    * @throws ClassCastException
-    * @param <T>
     * @param path -> path in this config
     * @return Object if found, nullable
     */
    @SuppressWarnings("unchecked")
    @Nullable
    public <T> T getField(String path) {
-      FileConfiguration cfg = this.getConfig();
+      CommentedFileConfig cfg = this.getConfig();
       Object o = cfg.get(path);
       if (o != null) {
          return (T) o;
@@ -53,8 +48,8 @@ public class CustomYML {
    }
    /**
     *
-    * @param \Path of field
-    * @param \Field value as Object
+    * @param path Path of field
+    * @param o Field value as Object
     * @return whether the save was successful
     */
    public boolean setField(String path, Object o) {
@@ -74,7 +69,7 @@ public class CustomYML {
    @SuppressWarnings("unchecked")
    @Nullable
    public <T> T getField(String path, T whenNotFound) {
-      FileConfiguration cfg = this.getConfig();
+      CommentedFileConfig cfg = this.getConfig();
       Object o = cfg.get(path);
       if (o != null) {
          try {
@@ -100,7 +95,7 @@ public class CustomYML {
    @SuppressWarnings("unchecked")
    @Nullable
    public <T> T getField(String path, T whenNotFound, String comment) {
-      FileConfiguration cfg = this.getConfig();
+      CommentedFileConfig cfg = this.getConfig();
       Object o = cfg.get(path);
       if (o != null) {
          try {
@@ -110,13 +105,13 @@ public class CustomYML {
          }
       } else {
          cfg.set(path, whenNotFound);
-         cfg.setComments(path, Arrays.asList(comment.split("\n")));
+         cfg.setComment(path, comment);
          save();
       }
       return whenNotFound;
    }
-   private FileConfiguration getConfig() {
-      return this.fc;
+   private CommentedFileConfig getConfig() {
+      return this.cf;
    }
    /**
     *
@@ -127,9 +122,9 @@ public class CustomYML {
       if (!folder.exists())
          folder.mkdirs();
       try {
-         this.fc.save(this.ymlfile);
+         this.cf.save();
          return true;
-      } catch (IOException e) {
+      } catch (Exception e) {
          e.printStackTrace();
          return false;
       }

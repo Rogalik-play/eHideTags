@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 
 import static ru.enis.ehidetags.Core.adventure;
-import static ru.enis.ehidetags.misc.Color.defaultColorize;
+import static ru.enis.ehidetags.misc.Color.deserialize;
 
 public class onJoin implements Listener {
 
@@ -26,7 +26,7 @@ public class onJoin implements Listener {
             final Audience audience = (Audience) adventure().player(e.getPlayer());
 
             //Отправка сообщения об обновлении
-            audience.sendMessage(defaultColorize("§6eHideTags §f| &7An update for plugin is available"));
+            audience.sendMessage(deserialize(" <white>| <gold>eHideTags <br> <white>| <gray>An update for plugin is available"));
         }
         //Добавление игрока в группу для скрытия ника
         other.hideName(e.getPlayer());

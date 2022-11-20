@@ -1,0 +1,14 @@
+[Actionbar]
+
+enabled = true
+
+# Placeholders:
+# %name% - Player Name
+# %displayname% - Player Displayname
+message = "<white>%name%"
+
+# THIS CANNOT BE DISABLED
+# This fixes bug when tameable entity do not shows their name
+# Placeholders:
+# %name% - Tameable Entity Name
+tameable-message = "<white>%name%"

@@ -4,26 +4,23 @@ import net.kyori.adventure.audience.Audience;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.jetbrains.annotations.NotNull;
 
 import org.jetbrains.annotations.Nullable;
 import ru.enis.ehidetags.*;
 import ru.enis.ehidetags.events.onInteract;
-import ru.enis.ehidetags.misc.configs.Config;
-import ru.enis.ehidetags.misc.configs.Messages;
+import ru.enis.ehidetags.misc.configs.*;
 import ru.enis.ehidetags.misc.other;
 
 import static ru.enis.ehidetags.Core.adventure;
-import static ru.enis.ehidetags.misc.Color.colorize;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static net.kyori.adventure.text.Component.text;
-import static ru.enis.ehidetags.misc.Color.defaultColorize;
-import static ru.enis.ehidetags.misc.configs.Messages.Plugin_Prefix;
+import static ru.enis.ehidetags.misc.Color.*;
+import static ru.enis.ehidetags.misc.configs.MessagesTOML.Plugin_Prefix;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
     private Core plugin;
@@ -39,41 +36,41 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         final Audience audience = (Audience) adventure().sender(sender);
 
         if (!sender.hasPermission(cmdname + ".command")) {
-            audience.sendMessage(colorize(Plugin_Prefix + Messages.NoPermission));
+            audience.sendMessage(deserialize(Plugin_Prefix + MessagesTOML.NoPermission));
             return true;
         }
 
         if(args.length == 0){
-            audience.sendMessage(defaultColorize(" &f| &6eHideTags" +
-                "\n &f| &aAuthor: " + plugin.getDescription().getAuthors() +
-                "\n &f| &aVersion: " + plugin.getDescription().getVersion()));
+            audience.sendMessage(deserialize(" <white>| <gold>eHideTags" +
+                "<br> <white>| <green>Author: " + plugin.getDescription().getAuthors() +
+                "<br> <white>| <green>Version: " + plugin.getDescription().getVersion()));
             return true;
         }
 
         if (args.length > 1) {
-            audience.sendMessage(colorize(Plugin_Prefix + Messages.Wrong_Usage));
+            audience.sendMessage(deserialize(Plugin_Prefix + MessagesTOML.Wrong_Usage));
             return true;
         }
 
         if(args[0].equalsIgnoreCase("reload") && sender.hasPermission(cmdname + ".reload")) {
-            new Config(plugin);
-            new Messages(plugin);
-            audience.sendMessage(colorize( Plugin_Prefix + Messages.Config_Reloaded));
+            new ConfigTOML(plugin);
+            new MessagesTOML(plugin);
+            audience.sendMessage(deserialize( Plugin_Prefix + MessagesTOML.Config_Reloaded));
             return true;
         }
 
         if(args[0].equalsIgnoreCase("debug") && sender.hasPermission(cmdname + ".debug")) {
             ArrayList playerlist = new ArrayList();
             Bukkit.getServer().getOnlinePlayers().forEach(p -> playerlist.add(p.getName()));
-            audience.sendMessage(defaultColorize(" &f| &6eHideTags" +
-                "\n &f| &aTeam Members: " + other.getScoreBoard().getTeam("eHideTags").getEntries().toString() +
-                "\n &f| &aPlayer List: " + playerlist +
-                "\n &f| &aPlugin Version: " + Core.getInstance().getDescription().getVersion() +
-                "\n &f| &aServer Version: " + Bukkit.getServer().getVersion()));
+            audience.sendMessage(deserialize(" <white>| <gold>eHideTags" +
+                "\n <white>| <green>Team Members: " + other.getScoreBoard().getTeam("eHideTags").getEntries().toString() +
+                "\n <white>| <green>Player List: " + playerlist +
+                "\n <white>| <green>Plugin Version: " + Core.getInstance().getDescription().getVersion() +
+                "\n <white>| <green>Server Version: " + Bukkit.getServer().getVersion()));
             return true;
         }
         if(args[0].equalsIgnoreCase("help") && sender.hasPermission(cmdname + ".help")) {
-            audience.sendMessage(colorize(Plugin_Prefix + Messages.Reload_Help ));
+            audience.sendMessage(deserialize(Plugin_Prefix + MessagesTOML.Reload_Help ));
             return true;
         }
         if(args[0].equalsIgnoreCase("test") && sender.hasPermission(cmdname + ".test")) {
@@ -84,7 +81,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
         }
-        audience.sendMessage(colorize(Plugin_Prefix + Messages.Wrong_Usage));
+        audience.sendMessage(deserialize(Plugin_Prefix + MessagesTOML.Wrong_Usage));
         return true;
     }
 

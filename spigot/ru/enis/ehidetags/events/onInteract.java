@@ -16,7 +16,7 @@ import ru.enis.ehidetags.misc.configs.Data;
 import ru.enis.ehidetags.misc.dependencies.PlaceholderAPIHook;
 
 import static ru.enis.ehidetags.Core.adventure;
-import static ru.enis.ehidetags.misc.Color.colorize;
+import static ru.enis.ehidetags.misc.Color.deserialize;
 
 public class onInteract implements Listener {
 
@@ -48,7 +48,7 @@ public class onInteract implements Listener {
                 placeholders = String.valueOf(new PlaceholderAPIHook(rc, placeholders, player).REL);
 
                 //Форматирование цвета
-                Component color = colorize(placeholders);
+                Component color = deserialize(placeholders);
 
                 //Отправка ЭкшнБара
                 audience.sendActionBar(color);
@@ -62,7 +62,7 @@ public class onInteract implements Listener {
             //Мои заменители
             String placeholders = Format.tameablePlaceholders(Data.tameable_message, tm);
             //Форматирование цвета
-            Component color = colorize(placeholders);
+            Component color = deserialize(placeholders);
             //Отправка ЭкшнБара
             audience.sendActionBar(color);
         }

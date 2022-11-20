@@ -2,11 +2,11 @@ package ru.enis.ehidetags.misc.configs;
 
 import ru.enis.ehidetags.*;
 
-public class Messages {
+public class MessagesTOML {
         public static String Reload_Help, Config_Reloaded, Wrong_Usage, NoPermission, Plugin_Prefix;
 
-        public Messages(Core plugin) {
-            CustomYML msg = new CustomYML("Messages", plugin);
+        public MessagesTOML(Core plugin) {
+            CustomTOML msg = new CustomTOML("Messages", plugin);
             Plugin_Prefix = msg.getField("Prefix", " <white>|</white> <gold>eHideTags</gold> <br> <white>|</white> ");
             Wrong_Usage = msg.getField("Wrong-Usage", "<gray>Wrong usage! Please type <gold>/eht help<gray>!");
             NoPermission = msg.getField("NoPermission", "<red>You do not have permission for this!");
