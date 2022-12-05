@@ -23,12 +23,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public MainCommand(Core pluginA){
         plugin = pluginA;
         PluginCommand command = plugin.getCommand(cmdname);
-        command.setAliases(Arrays.asList(new String[] { "ehidetags" }));
-        command.setDescription("Main Plugin Command");
         command.setExecutor(this);
         command.setTabCompleter(this);
-
-//        org.bukkit.command.defaults.HelpCommand
     }
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String commandLabel, @Nullable String[] args) {
