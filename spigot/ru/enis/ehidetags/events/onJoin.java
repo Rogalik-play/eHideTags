@@ -2,14 +2,14 @@ package ru.enis.ehidetags.events;
 
 import net.kyori.adventure.audience.Audience;
 import org.bukkit.Bukkit;
-import org.bukkit.event.player.PlayerJoinEvent;
-import ru.enis.ehidetags.*;
-import ru.enis.ehidetags.misc.*;
-import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import ru.enis.ehidetags.Core;
+import ru.enis.ehidetags.misc.Nicknames;
 
 import static ru.enis.ehidetags.Core.adventure;
-import static ru.enis.ehidetags.misc.Color.deserialize;
+import static ru.enis.ehidetags.misc.Format.colorize;
 
 public class onJoin implements Listener {
 
@@ -26,10 +26,10 @@ public class onJoin implements Listener {
             final Audience audience = (Audience) adventure().player(e.getPlayer());
 
             //Отправка сообщения об обновлении
-            audience.sendMessage(deserialize(" <white>| <gold>eHideTags <br> <white>| <gray>An update for plugin is available"));
+            audience.sendMessage(colorize(" <white>| <gold>eHideTags <br> <white>| <gray>An update for plugin is available"));
         }
         //Добавление игрока в группу для скрытия ника
-        other.hideName(e.getPlayer());
+        Nicknames.hideName(e.getPlayer());
     }
 }
 

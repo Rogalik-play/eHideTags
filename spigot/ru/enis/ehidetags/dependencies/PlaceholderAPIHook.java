@@ -1,11 +1,11 @@
-package ru.enis.ehidetags.misc.dependencies;
+package ru.enis.ehidetags.dependencies;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.enis.ehidetags.misc.logger.Log;
+import ru.enis.ehidetags.Core;
 
 public class PlaceholderAPIHook {
 
@@ -23,7 +23,7 @@ public class PlaceholderAPIHook {
             }
         }
         catch (Exception e){
-            Log.info("PlaceholderAPI loaded unsuccessful");
+            Core.getLogger().error("PlaceholderAPI loaded unsuccessful");
         }
     }
     private String setPlaceholders(final Player p, @NotNull String s) {

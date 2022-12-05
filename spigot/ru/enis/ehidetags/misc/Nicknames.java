@@ -8,7 +8,7 @@ import org.bukkit.scoreboard.Team;
 
 import static java.util.Objects.requireNonNull;
 
-public class other {
+public class Nicknames {
     private static Scoreboard board;
     private static Team team;
 

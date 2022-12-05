@@ -6,11 +6,6 @@ author: Enis
 description: Plugin to hide players nametags
 softdepend: [PlaceholderAPI]
 
-commands:
-   eht:
-      description: Main Plugin Command
-      usage: /eht
-
 permissions:
    eht.*:
       description: Gives access to all plugin functions

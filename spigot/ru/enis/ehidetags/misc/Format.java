@@ -1,5 +1,7 @@
 package ru.enis.ehidetags.misc;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 
@@ -9,9 +11,7 @@ public class Format {
             .replaceAll("%name%", p.getName())
             .replaceAll("%displayname%", p.getDisplayName());
     }
-    public static String tameablePlaceholders(String s, Tameable t) {
-        return s
-            .replaceAll("%name%", t.getName())
-            .replaceAll("%owner%", t.getOwner().getName());
+    public static Component colorize(String input) {
+        return MiniMessage.miniMessage().deserialize(input);
     }
 }

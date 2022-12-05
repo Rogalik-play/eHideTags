@@ -1,26 +1,23 @@
 package ru.enis.ehidetags.commands;
 
 import net.kyori.adventure.audience.Audience;
-import org.bukkit.Bukkit;
 import org.bukkit.command.*;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
-import ru.enis.ehidetags.*;
-import ru.enis.ehidetags.events.onInteract;
-import ru.enis.ehidetags.misc.configs.*;
-import ru.enis.ehidetags.misc.other;
-
-import static ru.enis.ehidetags.Core.adventure;
+import ru.enis.ehidetags.Core;
+import ru.enis.ehidetags.commands.subcommands.DebugCommand;
+import ru.enis.ehidetags.commands.subcommands.HelpCommand;
+import ru.enis.ehidetags.commands.subcommands.ReloadCommand;
+import ru.enis.ehidetags.commands.subcommands.TestCommand;
+import ru.enis.ehidetags.misc.configs.DATA;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static net.kyori.adventure.text.Component.text;
-import static ru.enis.ehidetags.misc.Color.*;
-import static ru.enis.ehidetags.misc.configs.MessagesTOML.Plugin_Prefix;
+import static ru.enis.ehidetags.Core.adventure;
+import static ru.enis.ehidetags.misc.Format.colorize;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
     private Core plugin;
@@ -28,60 +25,54 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public MainCommand(Core pluginA){
         plugin = pluginA;
         PluginCommand command = plugin.getCommand(cmdname);
+        command.setAliases(Arrays.asList(new String[] { "ehidetags" }));
+        command.setDescription("Main Plugin Command");
+        command.setUsage("/eht");
         command.setExecutor(this);
         command.setTabCompleter(this);
+
+//        org.bukkit.command.defaults.HelpCommand
     }
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String commandLabel, @Nullable String[] args) {
-        final Audience audience = (Audience) adventure().sender(sender);
+        final Audience audience = adventure().sender(sender);
 
         if (!sender.hasPermission(cmdname + ".command")) {
-            audience.sendMessage(deserialize(Plugin_Prefix + MessagesTOML.NoPermission));
+            audience.sendMessage(colorize(DATA.MESSAGE.PREFIX + DATA.MESSAGE.ERROR.PERMISSION));
             return true;
         }
 
         if(args.length == 0){
-            audience.sendMessage(deserialize(" <white>| <gold>eHideTags" +
+            audience.sendMessage(colorize(
+                " <white>| <gold>eHideTags" +
                 "<br> <white>| <green>Author: " + plugin.getDescription().getAuthors() +
-                "<br> <white>| <green>Version: " + plugin.getDescription().getVersion()));
+                "<br> <white>| <green>Version: " + plugin.getDescription().getVersion())
+            );
             return true;
         }
 
         if (args.length > 1) {
-            audience.sendMessage(deserialize(Plugin_Prefix + MessagesTOML.Wrong_Usage));
+            audience.sendMessage(colorize(DATA.MESSAGE.PREFIX + DATA.MESSAGE.ERROR.USAGE));
             return true;
         }
 
         if(args[0].equalsIgnoreCase("reload") && sender.hasPermission(cmdname + ".reload")) {
-            new ConfigTOML(plugin);
-            new MessagesTOML(plugin);
-            audience.sendMessage(deserialize( Plugin_Prefix + MessagesTOML.Config_Reloaded));
-            return true;
+            return new ReloadCommand().execute(sender, cmd, commandLabel, args);
         }
 
         if(args[0].equalsIgnoreCase("debug") && sender.hasPermission(cmdname + ".debug")) {
-            ArrayList playerlist = new ArrayList();
-            Bukkit.getServer().getOnlinePlayers().forEach(p -> playerlist.add(p.getName()));
-            audience.sendMessage(deserialize(" <white>| <gold>eHideTags" +
-                "\n <white>| <green>Team Members: " + other.getScoreBoard().getTeam("eHideTags").getEntries().toString() +
-                "\n <white>| <green>Player List: " + playerlist +
-                "\n <white>| <green>Plugin Version: " + Core.getInstance().getDescription().getVersion() +
-                "\n <white>| <green>Server Version: " + Bukkit.getServer().getVersion()));
-            return true;
+            return new DebugCommand().execute(sender, cmd, commandLabel, args);
         }
+
         if(args[0].equalsIgnoreCase("help") && sender.hasPermission(cmdname + ".help")) {
-            audience.sendMessage(deserialize(Plugin_Prefix + MessagesTOML.Reload_Help ));
-            return true;
+            return new HelpCommand().execute(sender, cmd, commandLabel, args);
         }
+
         if(args[0].equalsIgnoreCase("test") && sender.hasPermission(cmdname + ".test")) {
-            if (sender instanceof Player) {
-                onInteract.returnActionBar(((Player) sender).getPlayer(), ((Player) sender).getPlayer());
-                return true;
-            } else {
-                return true;
-            }
+            return new TestCommand().execute(sender, cmd, commandLabel, args);
         }
-        audience.sendMessage(deserialize(Plugin_Prefix + MessagesTOML.Wrong_Usage));
+
+        audience.sendMessage(colorize(DATA.MESSAGE.PREFIX + DATA.MESSAGE.ERROR.USAGE));
         return true;
     }
 

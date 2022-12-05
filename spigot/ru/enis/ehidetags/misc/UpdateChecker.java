@@ -2,7 +2,7 @@ package ru.enis.ehidetags.misc;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import ru.enis.ehidetags.misc.logger.Log;
+import ru.enis.ehidetags.Core;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +26,7 @@ public class UpdateChecker {
                     consumer.accept(scanner.next());
                 }
             } catch (IOException exception) {
-                Log.info("Unable to check for updates: " + exception.getMessage());
+                Core.getLogger().error("Unable to check for updates: " + exception.getMessage());
             }
         });
     }

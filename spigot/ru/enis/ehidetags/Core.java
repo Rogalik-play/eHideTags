@@ -12,12 +12,13 @@ import ru.enis.ehidetags.commands.MainCommand;
 import ru.enis.ehidetags.events.onInteract;
 import ru.enis.ehidetags.events.onJoin;
 import ru.enis.ehidetags.misc.UpdateChecker;
-import ru.enis.ehidetags.misc.configs.*;
-import ru.enis.ehidetags.misc.logger.Log;
-import ru.enis.ehidetags.misc.other;
+import ru.enis.ehidetags.misc.configs.ConfigTOML;
+import ru.enis.ehidetags.misc.configs.MessagesTOML;
+import ru.enis.ehidetags.misc.Log;
+import ru.enis.ehidetags.misc.Nicknames;
 
 import static net.kyori.adventure.text.Component.text;
-import static ru.enis.ehidetags.misc.Color.deserialize;
+import static ru.enis.ehidetags.misc.Format.colorize;
 
 public final class Core extends JavaPlugin implements Listener {
    String serverPackageName;
@@ -26,6 +27,7 @@ public final class Core extends JavaPlugin implements Listener {
    public static boolean OUTDATED = false;
    @Getter private static Core instance;
    private static BukkitAudiences adventure;
+   @Getter static Log logger;
 
    public static @NotNull BukkitAudiences adventure() {
       if(adventure == null) {
@@ -47,12 +49,12 @@ public final class Core extends JavaPlugin implements Listener {
       this.serverApiVersion = this.serverPackageName.substring(this.serverPackageName.lastIndexOf('.') + 1);
       majorMinecraftVersion = Integer.parseInt(this.serverApiVersion.split("_")[1]);
       //Logger
-      Log.init();
+      logger = new Log(this);
       //Config
       new ConfigTOML(this);
       new MessagesTOML(this);
       //Board
-      other.boardSettings();
+      Nicknames.boardSettings();
       //Event
       new onJoin(this);
       new onInteract(this);
@@ -62,7 +64,7 @@ public final class Core extends JavaPlugin implements Listener {
       new UpdateChecker(this, 97904).getVersion(version -> {
          if (!this.getDescription().getVersion().contains("-DEV")) {
             if (!this.getDescription().getVersion().equals(version)) {
-               Log.info("There is a new update available.");
+               logger.info("There is a new update available.");
                OUTDATED = true;
             }
          }
@@ -72,13 +74,13 @@ public final class Core extends JavaPlugin implements Listener {
       final Metrics metrics = new Metrics(this, thisId);
 
       if (!Bukkit.getOnlinePlayers().isEmpty()) {
-         Bukkit.getOnlinePlayers().forEach(other::hideName);
+         Bukkit.getOnlinePlayers().forEach(Nicknames::hideName);
       }
 
       Audience console = adventure().console();
 
       console.sendMessage(text(""));
-      console.sendMessage(deserialize(" <white>| <gold>eHideTags <br> <white>| <green>Successfully enabled"));
+      console.sendMessage(colorize(" <white>| <gold>eHideTags <br> <white>| <green>Successfully enabled"));
       console.sendMessage(text(""));
    }
 
@@ -88,6 +90,6 @@ public final class Core extends JavaPlugin implements Listener {
          adventure.close();
          adventure = null;
       }
-      other.removeBoard();
+      Nicknames.removeBoard();
    }
 }

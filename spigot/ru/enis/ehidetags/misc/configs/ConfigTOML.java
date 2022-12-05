@@ -6,16 +6,11 @@ public class ConfigTOML {
 
    public ConfigTOML(Core plugin) {
       CustomTOML cfg = new CustomTOML("Main Config", plugin);
-      Data.player_message = cfg.getField("Actionbar.message", "<gold>%name%",
+      DATA.ACTIONBAR.MESSAGE = cfg.getField("Display Types.Actionbar.Message", "<gold>%name%",
           " Placeholders:\n" +
               " %name% - Player Name\n" +
               " %displayname% - Player Displayname");
-      Data.tameable_message = cfg.getField("Actionbar.tameable-message", "<white>%name%",
-          " THIS CANNOT BE DISABLED\n" +
-              " This fixes bug when tameable entity do not shows their name\n" +
-              " Placeholders:\n" +
-              " %name% - Tameable Entity Name");
-      Data.enabled = cfg.getField("Actionbar.enabled", true);
+      DATA.ACTIONBAR.ENABLE = cfg.getField("Display Types.Actionbar.Enabled", true);
    }
 
 //   Serializer serializer = new Serializer(Serializers.ТВОЙ_СЕРИАЛИЗЕР.getSerializer());

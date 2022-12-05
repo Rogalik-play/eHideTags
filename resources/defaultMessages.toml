@@ -1,7 +1,0 @@
-Prefix = " <white>|</white> <gold>eHideTags</gold> <br> <white>|</white> "
-NoPermission = "<red>You do not have permission for this!"
-Wrong-Usage = "<gray>Wrong usage! Please type <gold>/eht help<gray>!"
-Reload = "<green>Config successfully reloaded</green>"
-
-[Help]
-Reload = "<green>/eht reload - Reloads plugin configuration"
