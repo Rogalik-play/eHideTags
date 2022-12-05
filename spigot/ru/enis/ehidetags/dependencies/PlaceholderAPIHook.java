@@ -23,7 +23,7 @@ public class PlaceholderAPIHook {
             }
         }
         catch (Exception e){
-            Core.getLogger().error("PlaceholderAPI loaded unsuccessful");
+            Core.getLogging().error("PlaceholderAPI loaded unsuccessful");
         }
     }
     private String setPlaceholders(final Player p, @NotNull String s) {
@@ -36,8 +36,9 @@ public class PlaceholderAPIHook {
     private String setBracketPlaceholders(Player p, String s) {
         try {
             return PlaceholderAPI.setBracketPlaceholders(p, s);
-        } catch (Exception e){}
+        } catch (Exception e){
         return s;
+        }
     }
     private String setRelationalPlaceholders(Player p, String s, Player P) {
         try {

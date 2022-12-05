@@ -26,7 +26,7 @@ public class UpdateChecker {
                     consumer.accept(scanner.next());
                 }
             } catch (IOException exception) {
-                Core.getLogger().error("Unable to check for updates: " + exception.getMessage());
+                Core.getLogging().error("Unable to check for updates: " + exception.getMessage());
             }
         });
     }

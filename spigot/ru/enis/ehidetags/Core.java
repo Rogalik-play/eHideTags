@@ -27,7 +27,7 @@ public final class Core extends JavaPlugin implements Listener {
    public static boolean OUTDATED = false;
    @Getter private static Core instance;
    private static BukkitAudiences adventure;
-   @Getter static Log logger;
+   static Log logger;
 
    public static @NotNull BukkitAudiences adventure() {
       if(adventure == null) {
@@ -38,6 +38,10 @@ public final class Core extends JavaPlugin implements Listener {
 
    public static int majorMinecraftVersion() {
       return majorMinecraftVersion;
+   }
+
+   public static Log getLogging() {
+      return logger;
    }
 
    public void onEnable() {
