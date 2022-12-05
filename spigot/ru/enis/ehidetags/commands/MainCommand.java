@@ -1,6 +1,7 @@
 package ru.enis.ehidetags.commands;
 
 import net.kyori.adventure.audience.Audience;
+import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,10 +12,7 @@ import ru.enis.ehidetags.commands.subcommands.ReloadCommand;
 import ru.enis.ehidetags.commands.subcommands.TestCommand;
 import ru.enis.ehidetags.misc.configs.DATA;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static ru.enis.ehidetags.Core.adventure;
 import static ru.enis.ehidetags.misc.Format.colorize;
@@ -24,6 +22,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     private String cmdname = "eht";
     public MainCommand(Core pluginA){
         plugin = pluginA;
+        Bukkit.getPluginManager().getPlugin(plugin.getName()).getDescription().getCommands().put("eht", Map.of());
         PluginCommand command = plugin.getCommand(cmdname);
         command.setAliases(Arrays.asList(new String[] { "ehidetags" }));
         command.setDescription("Main Plugin Command");
