@@ -22,7 +22,8 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     private String cmdname = "eht";
     public MainCommand(Core pluginA){
         plugin = pluginA;
-        Bukkit.getPluginManager().getPlugin(plugin.getName()).getDescription().getCommands().put("eht", Map.of());
+        Map<String, Object> cmdmap = new HashMap<String, Object>();
+        Bukkit.getPluginManager().getPlugin(plugin.getName()).getDescription().getCommands().put("eht", cmdmap);
         PluginCommand command = plugin.getCommand(cmdname);
         command.setAliases(Arrays.asList(new String[] { "ehidetags" }));
         command.setDescription("Main Plugin Command");
