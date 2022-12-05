@@ -16,13 +16,16 @@ import static ru.enis.ehidetags.misc.Format.colorize;
 public class ReloadCommand implements ISubCommand {
   @Override
   public Boolean execute(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String commandLabel, @Nullable String[] args) {
-    Core plugin = Core.getInstance();
     final Audience audience = adventure().sender(sender);
+    if (sender.hasPermission("eht.reload")) {
+      Core plugin = Core.getInstance();
 
-    new ConfigTOML(plugin);
-    new MessagesTOML(plugin);
+      new ConfigTOML(plugin);
+      new MessagesTOML(plugin);
 
-    audience.sendMessage(colorize( DATA.MESSAGE.PREFIX + DATA.MESSAGE.SUCCESS.RELOAD));
+      audience.sendMessage(colorize( DATA.MESSAGE.PREFIX + DATA.MESSAGE.SUCCESS.RELOAD));
+    }
+    audience.sendMessage(colorize(DATA.MESSAGE.PREFIX + DATA.MESSAGE.ERROR.PERMISSION));
     return true;
   }
 }

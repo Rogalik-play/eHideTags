@@ -49,20 +49,15 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if(args[0].equalsIgnoreCase("reload") && sender.hasPermission(cmdname + ".reload")) {
-            return new ReloadCommand().execute(sender, cmd, commandLabel, args);
-        }
-
-        if(args[0].equalsIgnoreCase("debug") && sender.hasPermission(cmdname + ".debug")) {
-            return new DebugCommand().execute(sender, cmd, commandLabel, args);
-        }
-
-        if(args[0].equalsIgnoreCase("help") && sender.hasPermission(cmdname + ".help")) {
-            return new HelpCommand().execute(sender, cmd, commandLabel, args);
-        }
-
-        if(args[0].equalsIgnoreCase("test") && sender.hasPermission(cmdname + ".test")) {
-            return new TestCommand().execute(sender, cmd, commandLabel, args);
+        switch (args[0].toLowerCase()) {
+            case "reload":
+                return new ReloadCommand().execute(sender, cmd, commandLabel, args);
+            case "debug":
+                return new DebugCommand().execute(sender, cmd, commandLabel, args);
+            case "help":
+                return new HelpCommand().execute(sender, cmd, commandLabel, args);
+            case "test":
+                return new TestCommand().execute(sender, cmd, commandLabel, args);
         }
 
         audience.sendMessage(colorize(DATA.MESSAGE.PREFIX + DATA.MESSAGE.ERROR.USAGE));
