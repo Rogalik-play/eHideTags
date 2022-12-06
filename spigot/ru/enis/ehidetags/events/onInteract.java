@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.jetbrains.annotations.Nullable;
 import ru.enis.ehidetags.Core;
 import ru.enis.ehidetags.misc.Format;
-import ru.enis.ehidetags.misc.configs.DATA;
+import ru.enis.ehidetags.misc.configs.Data;
 import ru.enis.ehidetags.dependencies.PlaceholderAPIHook;
 
 import static ru.enis.ehidetags.Core.adventure;
@@ -30,19 +30,19 @@ public class onInteract implements Listener {
         //Берет игрока для Audience
         final Audience audience = adventure().player(e.getPlayer());
         //Отправка ЭкшнБара
-        audience.sendActionBar(returnFormated(e.getRightClicked(), e.getPlayer()) != null ? returnFormated(e.getRightClicked(), e.getPlayer()) : Component.text("null"));
+        if (returnFormated(e.getRightClicked(), e.getPlayer(), true) != null) audience.sendActionBar(returnFormated(e.getRightClicked(), e.getPlayer(), true));
     }
 
-    public static Component returnFormated(Entity entity, @Nullable Player player) {
+    public static Component returnFormated(Entity entity, @Nullable Player player, Boolean sendTame) {
         //Проверка на игрока
         if (entity instanceof Player && !entity.hasMetadata("NPC")) {
             //Проверка на включенный ЭкшнБар
-            if (DATA.ACTIONBAR.ENABLE) {
+            if (Data.ACTIONBAR.ENABLE) {
                 //Берет игрока на ПКМ
                 Player rc = (Player) entity;
 
                 //Мои заменители
-                String placeholders = Format.playerPlaceholders(DATA.ACTIONBAR.MESSAGE, rc);
+                String placeholders = Format.playerPlaceholders(Data.ACTIONBAR.MESSAGE, rc);
 
                 //Заменители из PAPI
                 placeholders = String.valueOf(new PlaceholderAPIHook(rc, placeholders, player).REL);
@@ -54,7 +54,7 @@ public class onInteract implements Listener {
                 return color;
             }
         }
-        if (entity instanceof Tameable && !player.isSneaking() && ((Tameable) entity).isTamed()) {
+        if (entity instanceof Tameable && !player.isSneaking() && ((Tameable) entity).isTamed() && sendTame) {
             //Берет моба на ПКМ
             Tameable tm = (Tameable) entity;
             //Форматирование цвета

@@ -1,16 +1,11 @@
 package ru.enis.ehidetags.commands;
 
 import net.kyori.adventure.audience.Audience;
-import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.enis.ehidetags.Core;
-import ru.enis.ehidetags.commands.subcommands.DebugCommand;
-import ru.enis.ehidetags.commands.subcommands.HelpCommand;
-import ru.enis.ehidetags.commands.subcommands.ReloadCommand;
-import ru.enis.ehidetags.commands.subcommands.TestCommand;
-import ru.enis.ehidetags.misc.configs.DATA;
+import ru.enis.ehidetags.misc.configs.Data;
 
 import java.util.*;
 
@@ -31,7 +26,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         final Audience audience = adventure().sender(sender);
 
         if (!sender.hasPermission(cmdname + ".command")) {
-            audience.sendMessage(colorize(DATA.MESSAGE.PREFIX + DATA.MESSAGE.ERROR.PERMISSION));
+            audience.sendMessage(colorize(Data.MESSAGE.PREFIX + Data.MESSAGE.ERROR.PERMISSION));
             return true;
         }
 
@@ -45,27 +40,28 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length > 1) {
-            audience.sendMessage(colorize(DATA.MESSAGE.PREFIX + DATA.MESSAGE.ERROR.USAGE));
+            audience.sendMessage(colorize(Data.MESSAGE.PREFIX + Data.MESSAGE.ERROR.USAGE));
             return true;
         }
 
         switch (args[0].toLowerCase()) {
             case "reload":
-                return new ReloadCommand().execute(sender, cmd, commandLabel, args);
+                return new ReloadSubCommand().execute(sender, cmd, commandLabel, args);
             case "debug":
-                return new DebugCommand().execute(sender, cmd, commandLabel, args);
+                return new DebugSubCommand().execute(sender, cmd, commandLabel, args);
             case "help":
-                return new HelpCommand().execute(sender, cmd, commandLabel, args);
+                return new HelpSubCommand().execute(sender, cmd, commandLabel, args);
             case "test":
-                return new TestCommand().execute(sender, cmd, commandLabel, args);
+                return new TestSubCommand().execute(sender, cmd, commandLabel, args);
         }
 
-        audience.sendMessage(colorize(DATA.MESSAGE.PREFIX + DATA.MESSAGE.ERROR.USAGE));
+        audience.sendMessage(colorize(Data.MESSAGE.PREFIX + Data.MESSAGE.ERROR.USAGE));
         return true;
     }
 
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command,
+                                      @NotNull String s, @NotNull String[] args) {
         final List<String> completions = new ArrayList<>();
 
         if(commandSender.hasPermission(cmdname + ".reload")) {

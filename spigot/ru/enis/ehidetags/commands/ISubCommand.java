@@ -1,4 +1,4 @@
-package ru.enis.ehidetags.commands.subcommands;
+package ru.enis.ehidetags.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

@@ -1,4 +1,4 @@
-package ru.enis.ehidetags.commands.subcommands;
+package ru.enis.ehidetags.commands;
 
 import net.kyori.adventure.audience.Audience;
 import org.bukkit.Bukkit;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.enis.ehidetags.Core;
 import ru.enis.ehidetags.misc.Nicknames;
-import ru.enis.ehidetags.misc.configs.DATA;
+import ru.enis.ehidetags.misc.configs.Data;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -16,7 +16,7 @@ import java.util.Objects;
 import static ru.enis.ehidetags.Core.adventure;
 import static ru.enis.ehidetags.misc.Format.colorize;
 
-public class DebugCommand implements ISubCommand {
+public class DebugSubCommand implements ISubCommand {
   @Override
   public Boolean execute(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String commandLabel, @Nullable String[] args) {
     final Audience audience = adventure().sender(sender);
@@ -28,8 +28,9 @@ public class DebugCommand implements ISubCommand {
           "\n <white>| <green>Player List: " + players +
           "\n <white>| <green>Plugin Version: " + Core.getInstance().getDescription().getVersion() +
           "\n <white>| <green>Server Version: " + Bukkit.getServer().getVersion()));
+      return true;
     }
-    audience.sendMessage(colorize(DATA.MESSAGE.PREFIX + DATA.MESSAGE.ERROR.PERMISSION));
+    audience.sendMessage(colorize(Data.MESSAGE.PREFIX + Data.MESSAGE.ERROR.PERMISSION));
     return true;
   }
 }

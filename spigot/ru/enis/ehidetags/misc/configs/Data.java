@@ -1,7 +1,11 @@
 package ru.enis.ehidetags.misc.configs;
 
-public class DATA {
+public class Data {
     public static class ACTIONBAR {
+        public static Boolean ENABLE;
+        public static String MESSAGE;
+    }
+    public static class TITLE{
         public static Boolean ENABLE;
         public static String MESSAGE;
     }

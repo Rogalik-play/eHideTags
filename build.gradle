@@ -48,7 +48,7 @@ shadowJar {
     relocate "org.bstats", "ru.enis.libs.bstats"
     relocate "net.kyori", "ru.enis.libs.kyori"
 
-    archiveFileName = "${rootProject.name}-${version}.${extension}"
+    archiveFileName = "${rootProject.name}-${version}-" + getBranchHash() + ".${extension}"
 }
 java {
     withSourcesJar()
@@ -64,10 +64,10 @@ sourceSets {
     }
 }
 
-//def getBranchHash() {
-//    def branchHash = "git rev-parse --short HEAD".execute().text.trim()
-//    return branchHash
-//}
+def getBranchHash() {
+    def branchHash = "git rev-parse --short HEAD".execute().text.trim()
+    return branchHash
+}
 
 def getBranchVer() {
     def branchName = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
