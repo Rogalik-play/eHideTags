@@ -30,10 +30,10 @@ public class onInteract implements Listener {
         //Берет игрока для Audience
         final Audience audience = adventure().player(e.getPlayer());
         //Отправка ЭкшнБара
-        if (returnFormated(e.getRightClicked(), e.getPlayer(), true) != null) audience.sendActionBar(returnFormated(e.getRightClicked(), e.getPlayer(), true));
+        if (returnFormatted(e.getRightClicked(), e.getPlayer(), true) != null) audience.sendActionBar(returnFormatted(e.getRightClicked(), e.getPlayer(), true));
     }
 
-    public static Component returnFormated(Entity entity, @Nullable Player player, Boolean sendTame) {
+    public static Component returnFormatted(Entity entity, @Nullable Player player, Boolean sendTame) {
         //Проверка на игрока
         if (entity instanceof Player && !entity.hasMetadata("NPC")) {
             //Проверка на включенный ЭкшнБар
@@ -47,20 +47,16 @@ public class onInteract implements Listener {
                 //Заменители из PAPI
                 placeholders = String.valueOf(new PlaceholderAPIHook(rc, placeholders, player).REL);
 
-                //Форматирование цвета
-                Component color = colorize(placeholders);
-
                 //Возврат форматированного
-                return color;
+                return colorize(placeholders);
             }
         }
-        if (entity instanceof Tameable && !player.isSneaking() && ((Tameable) entity).isTamed() && sendTame) {
-            //Берет моба на ПКМ
-            Tameable tm = (Tameable) entity;
-            //Форматирование цвета
-            Component color = colorize("<white>" + tm.getName());
-            //Возврат форматированного
-            return color;
+        if (player != null && entity instanceof Tameable tm && !player.isSneaking() && ((Tameable) entity).isTamed() && sendTame) {
+            if (tm.getCustomName() != null) {
+                return colorize("<white>" + tm.getCustomName());
+            } else {
+                return null;
+            }
         }
         return null;
     }

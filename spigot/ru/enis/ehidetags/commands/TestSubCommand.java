@@ -22,7 +22,7 @@ public class TestSubCommand implements ISubCommand {
     if (sender.hasPermission("eht.test")) {
       if (sender instanceof Player) {
         //Отправка ЭкшнБара
-        audience.sendActionBar(onInteract.returnFormated(((Player) sender).getPlayer(), ((Player) sender).getPlayer(), true) != null ? Objects.requireNonNull(onInteract.returnFormated(((Player) sender).getPlayer(), ((Player) sender).getPlayer(), true)) : Component.text("null"));
+        audience.sendActionBar(onInteract.returnFormatted(((Player) sender).getPlayer(), ((Player) sender).getPlayer(), true) != null ? Objects.requireNonNull(onInteract.returnFormatted(((Player) sender).getPlayer(), ((Player) sender).getPlayer(), true)) : Component.text("null"));
       }
       return true;
     }
