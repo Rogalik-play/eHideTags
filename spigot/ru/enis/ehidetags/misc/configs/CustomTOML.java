@@ -26,6 +26,7 @@ public class CustomTOML {
       this.path = "plugins/" + jp.getName();
       File tomlfile = new File(path + File.separatorChar + name + ".toml");
       this.cf = CommentedFileConfig.builder(tomlfile).build(); // .defaultResource("defaultConfig.toml").autosave()
+      this.cf.load();
 //      this.fc = (FileConfiguration) YamlConfiguration.loadConfiguration(this.tomlfile);
    }
    /**

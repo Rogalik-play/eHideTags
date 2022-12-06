@@ -10,6 +10,7 @@ public class ConfigTOML {
           " Placeholders:\n" +
               " %name% - Player Name\n" +
               " %displayname% - Player Displayname");
+      Data.ACTIONBAR.USE_TAME = cfg.getField("Actionbar.Enable for Tamed", true);
       Data.ACTIONBAR.ENABLE = cfg.getField("Actionbar.Enabled", true);
    }
 

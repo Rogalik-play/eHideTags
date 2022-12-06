@@ -3,10 +3,12 @@ package ru.enis.ehidetags.misc.configs;
 public class Data {
     public static class ACTIONBAR {
         public static Boolean ENABLE;
+        public static Boolean USE_TAME;
         public static String MESSAGE;
     }
     public static class TITLE{
         public static Boolean ENABLE;
+        public static Boolean USE_TAME;
         public static String MESSAGE;
     }
     public static class MESSAGE {
