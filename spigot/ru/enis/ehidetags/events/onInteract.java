@@ -40,17 +40,17 @@ public class onInteract implements Listener {
 
     public static Component returnFormatted(String toFormat, Boolean sendTame, Entity entity, @Nullable Player player) {
         //Проверка на игрока
-        if (entity instanceof Player rc && !entity.hasMetadata("NPC")) {
+        if (entity instanceof Player && !entity.hasMetadata("NPC")) {
             //Мои заменители
-            String placeholders = Format.playerPlaceholders(Data.ACTIONBAR.MESSAGE, rc);
+            String placeholders = Format.playerPlaceholders(Data.ACTIONBAR.MESSAGE, ((Player) entity).getPlayer());
             //Заменители из PAPI
-            placeholders = String.valueOf(new PlaceholderAPIHook(rc, placeholders, player).REL);
+            placeholders = String.valueOf(new PlaceholderAPIHook(((Player) entity).getPlayer(), placeholders, player).REL);
             //Возврат форматированного
             return colorize(placeholders);
         }
-        if (player != null && entity instanceof Tameable tm && !player.isSneaking() && ((Tameable) entity).isTamed() && sendTame) {
-            if (tm.getCustomName() != null) {
-                return colorize("<white>" + tm.getCustomName());
+        if (player != null && entity instanceof Tameable && !player.isSneaking() && ((Tameable) entity).isTamed() && sendTame) {
+            if (entity.getCustomName() != null) {
+                return colorize("<white>" + entity.getCustomName());
             } else {
                 return null;
             }
