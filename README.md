@@ -1,3 +1,9 @@
+<h1>This project is abandoned by licensing problems.
+<br>
+Please use <a href="https://modrinth.com/plugin/eht">"Advanced eHideTags"</a>.
+<br>
+It's continued version of this plugin from me.</h1>
+
 ![https://raw.githubusercontent.com/en0tuk/eHideTags/master/spigot%20images/EHT-Spigot-Banner@2x.png](https://raw.githubusercontent.com/en0tuk/eHideTags/master/spigot%20images/EHT-Spigot-Banner@2x.png)
 
 ## <center>**ABOUT**</center>
